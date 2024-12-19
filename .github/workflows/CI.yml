@@ -80,7 +80,7 @@ jobs:
         if: matrix.settings.target == 'x86_64-unknown-linux-gnu'
         run: |
           sudo apt-get update
-          sudo apt-get install pkg-config libssl-dev
+          sudo apt-get install pkg-config libssl-dev openssl
       - name: Install dependencies
         run: yarn install
       - name: Setup node x86
