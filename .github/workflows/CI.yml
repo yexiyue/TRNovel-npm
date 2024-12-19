@@ -10,8 +10,8 @@ permissions:
   push:
     branches:
       - main
-    tags-ignore:
-      - "**"
+    tags:
+      - "[v]?[0-9]+.[0-9]+.[0-9]+"
     paths-ignore:
       - "**/*.md"
       - LICENSE
