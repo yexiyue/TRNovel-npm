@@ -213,7 +213,7 @@ jobs:
         #   else
         #     echo "Not a release, skipping publish"
         #   fi
-        run:
+        run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
           npm publish --access public
         env:
