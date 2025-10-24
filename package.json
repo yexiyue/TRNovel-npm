@@ -11,16 +11,14 @@
   "license": "MIT",
   "keywords": [
     "napi-rs",
-    "NAPI",
-    "N-API",
-    "Rust",
-    "node-addon",
-    "node-addon-api"
+    "Novel",
+    "Reader",
+    "TTS",
+    "Rust"
   ],
   "files": [
     "index.d.ts",
-    "index.js",
-    "browser.js"
+    "index.js"
   ],
   "napi": {
     "binaryName": "trnovel",
