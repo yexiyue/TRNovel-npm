@@ -1,12 +1,16 @@
 {
   "name": "@trnovel/trnovel",
-  "version": "0.7.4",
+  "version": "0.7.3",
   "description": "Template project for writing node package with napi-rs",
   "main": "index.js",
   "types": "index.d.ts",
   "bin": {
     "trn": "./bin/trn.js",
     "trnovel": "./bin/trnovel.js"
+  },
+  "repository": {
+    "url": "git+ssh://git@github.com:yexiyue/TRNovel-npm.git",
+    "type": "git"
   },
   "license": "MIT",
   "keywords": [

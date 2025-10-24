@@ -9,10 +9,10 @@ permissions:
   id-token: write
 "on":
   push:
-    tags:
-      - "v*"
     branches:
       - main
+    tags-ignore:
+      - "**"
     paths-ignore:
       - "**/*.md"
       - LICENSE
@@ -360,14 +360,9 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    if: github.ref_type == 'tag'
     needs:
       - lint
       - build
-      # - build-freebsd
-      # - test-macOS-windows-binding
-      # - test-linux-binding
-      # - test-wasi
     steps:
       - uses: actions/checkout@v5
       - name: setup pnpm
@@ -393,15 +388,17 @@ jobs:
       - name: Publish
         run: |
           npm config set provenance true
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          npm publish --access public
+          if git log -1 --pretty=%B | grep "^v\?[0-9]\+\.[0-9]\+\.[0-9]\+$";
+          then
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+            npm publish --access public
+          elif git log -1 --pretty=%B | grep "^v\?[0-9]\+\.[0-9]\+\.[0-9]\+";
+          then
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+            npm publish --tag next --access public
+          else
+            echo "Not a release, skipping publish"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
