@@ -10,7 +10,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 napi-derive = "3.0.0"
-trnovel = "0.8.0"
+trnovel = "0.8.1"
 
 [dependencies.napi]
 version = "3.0.0"
